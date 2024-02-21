@@ -1,4 +1,4 @@
-//Express code
+//Express code added.
 const Express=require("express");
 const App=Express();
 const port=3000;
@@ -12,5 +12,5 @@ App.get("/ping",(req,res)=>{
 });
 
 App.listen(port,()=>{
-    console.log(`Node App is runnig ${port} 🚀`)
+    console.log(`Node App is running ${port} 🚀`)
 })
