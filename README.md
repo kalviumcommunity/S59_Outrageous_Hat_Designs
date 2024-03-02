@@ -22,4 +22,4 @@ Created by Swasti Mohanty .🚀
 
 Deployment link:- https://s59-outrageous-hat-designs.onrender.com/ping
 
-Deployment Link using Cloudflare :- https://hats-4w6.pages.dev/
+Deployment link for my frontend using Cloudflare - ASAP project :- https://hats-4w6.pages.dev/
