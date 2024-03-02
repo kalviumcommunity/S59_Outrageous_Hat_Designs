@@ -21,3 +21,5 @@ We welcome contributions to the Outrageous Hat Designs Gallery! If you have an o
 Created by Swasti Mohanty .🚀
 
 Deployment link:- https://s59-outrageous-hat-designs.onrender.com/ping
+
+Deployment Link using Cloudflare :- https://hats-4w6.pages.dev/
