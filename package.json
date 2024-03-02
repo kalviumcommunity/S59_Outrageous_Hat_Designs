@@ -1,0 +1,16 @@
+{
+  "name": "s59_outrageous_hat_designs",
+  "version": "1.0.0",
+  "description": "Welcome to the Outrageous Hat Designs Gallery! Here, you can explore a wide range of unconventional and unique hat designs to express your style and personality.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"cd frontend && npm run dev\" \"cd backend && npm start\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
