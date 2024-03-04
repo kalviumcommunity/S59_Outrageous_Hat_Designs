@@ -114,6 +114,13 @@ body{
 }
 
 
-
+/* fetchcomponent */
+.heading {
+  font-size: 20px;
+  font-weight: bold;
+  color: #726161;
+  margin-bottom: 20px; 
+  text-align: center;
+}
 
 
