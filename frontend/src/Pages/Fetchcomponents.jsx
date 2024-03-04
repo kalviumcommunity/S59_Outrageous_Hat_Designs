@@ -1,15 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import CategoryList from '../components/CategoryList';
-import { useEffect,useState } from 'react'
 
 export default function Fetchcomponents() {
     const [data, setData] = useState([]);
-    // https://outland-server.onrender.com/crude-api
-    // http://localhost:3000/crude-api
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("https://outland-server.onrender.com/crude-api")
+                const response = await fetch("https://hat-bxol.onrender.com/crude-api");
                 const json = await response.json();
                 console.log(json)
                 setData(json);
@@ -20,7 +18,12 @@ export default function Fetchcomponents() {
 
         fetchData(); 
     }, []); 
-  return(
-    <CategoryList data={data}/>
-  );
+
+    return (
+        <>
+        <p className="heading">Find Your Style: Shop Our Latest Selection</p>
+        <CategoryList hat={data}/>
+        </>
+        
+    );
 }
