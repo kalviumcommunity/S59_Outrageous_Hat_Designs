@@ -12,6 +12,25 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.patch('/like/:id', async (req, res) => {
+  try {
+    const hatId = req.params.id;
+    const existingHat = await Hat.findById(hatId);
+
+    if (!existingHat) {
+      return res.status(404).json({ message: 'Hat not found' });
+    }
+
+    existingHat.isLiked = !existingHat.isLiked;
+    await existingHat.save();
+
+    res.json(existingHat);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
 router.get("/:id", async (req, res) => {
   try {
     const hats = await Hat.findById(req.params.id);

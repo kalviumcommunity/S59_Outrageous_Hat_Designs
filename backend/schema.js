@@ -3,23 +3,27 @@ const mongoose=require('mongoose');
 const hatSchema= new mongoose.Schema({
     HatID: {
         type: Number,
-        required: true
+        // required: true
     },
     HatName: {
         type: String,
-        required: true
+        // required: true
     },
     DesignerID: {
         type: String,
-        required: true
+        // required: true
     },
     Color: {
         type: String,
-        required: true
+        // required: true
     },
     Material: {
         type: String,
-        required: true
+        // required: true
+    },
+    isLiked: {
+        type: Boolean,
+        default: false  
     }
 });
 
