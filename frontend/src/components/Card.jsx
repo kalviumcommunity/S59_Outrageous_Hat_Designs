@@ -8,7 +8,7 @@ const HatCard = ({ hat }) => {
 
   const handleLikeToggle = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/crude-api/like/${hat._id}`, {
+      const response = await fetch(`https://hat-bxol.onrender.com/crude-api/like/${hat._id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

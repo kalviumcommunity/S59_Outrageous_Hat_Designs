@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { connectToDB } = require("./db");
-const Hat = require("./schema");
+const Hat = require("./Model/schema");
+const CustomisableHat = require("./Model/CustomisableHat");
 
 router.get("/", async (req, res) => {
   try {
@@ -9,6 +10,21 @@ router.get("/", async (req, res) => {
     res.json(hats);
   } catch (err) {
     res.send("error" + err);
+  }
+});
+router.post("/add_customizable_hat", async (req, res) => {
+  const { design_name, description, imageUrl } = req.body;
+
+  try {
+      const customisableHat = new CustomisableHat({
+          design_name,
+          description,
+          imageUrl,
+      });
+      const saved = await customisableHat.save();
+      res.status(201).json(saved);
+  } catch (error) {
+      res.status(500).json({ message: error.message });
   }
 });
 
@@ -36,9 +52,10 @@ router.get("/:id", async (req, res) => {
     const hats = await Hat.findById(req.params.id);
     res.json(hats);
   } catch (err) {
-    res.send("error", err);
+    res.status(500).send("error" + err); 
   }
 });
+
 
 router.post("/create", async (req, res) => {
   const hat = new Hat({

@@ -1,6 +1,6 @@
 import React from 'react';
-
 import Hat from '../assets/Hat.webp';
+import { Link } from 'react-router-dom';
 
 export default function Landing() {
   return (
@@ -23,7 +23,7 @@ export default function Landing() {
               <p>XL</p>
             </div>
           </div>
-          <button className='button-orange' id='shop-now'>Shop now</button>
+          <Link to="/custom"><button className='button-orange' id='shop-now'>Customise</button></Link>
         </div>
         <img src={Hat} alt="Image Title" className="card-image" />
       </div>
