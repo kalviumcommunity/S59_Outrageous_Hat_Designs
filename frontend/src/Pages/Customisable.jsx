@@ -21,7 +21,7 @@ function AddCustomisable() {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/crude-api/add_customizable_hat",
+        "https://hat-bxol.onrender.com/crude-api/add_customizable_hat",
         {
           method: "POST",
           headers: {
