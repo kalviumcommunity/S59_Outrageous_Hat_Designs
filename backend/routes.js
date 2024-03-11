@@ -12,6 +12,41 @@ router.get("/", async (req, res) => {
     res.send("error" + err);
   }
 });
+router.get("/customizable",async(req,res)=>{
+  try{
+    const customisableHat=await CustomisableHat.find();
+    res.json(customisableHat);
+  }
+  catch{
+    res.send("error"+err);
+  }
+})
+router.patch("/customUpdate/:id",async(req,res)=>{
+  try {
+    const customHat = await CustomisableHat.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!customHat) {
+      return res.status(404).send("Hat not found");
+    }
+    res.json(customHat);
+  } catch (err) {
+    res.status(500).send("Error: " + err);
+  }
+})
+
+router.delete("/customDelete/:id", async (req, res) => {
+  try {
+    const Customhat = await CustomisableHat.findByIdAndDelete(req.params.id);
+    if (!Customhat) {
+      return res.status(404).send("Custom hat not found");
+    }
+    res.send(" Custom Hat deleted successfully");
+  } catch (err) {
+    res.status(500).send("Error deleting Custom hat");
+  }
+})
+
 router.post("/add_customizable_hat", async (req, res) => {
   const { design_name, description, imageUrl } = req.body;
 
