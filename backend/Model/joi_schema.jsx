@@ -6,12 +6,12 @@ const HatJoiSchema=Joi.object({
     DesignerID:Joi.string(),
     Color:Joi.string(),
     Material:Joi.string(),
-    isLiked:Joi.string()
+    isLiked:Joi.boolean()
 });
 
 const CustomSchema = Joi.object({
-    design_name: Joi.string().required(),
-    description: Joi.string().required(),
+    design_name: Joi.string().required().min(20).max(30),
+    description: Joi.string().required().max(50),
     imageUrl: Joi.string().required(),
     created_at: Joi.date().default(() => new Date(), 'current date and time')
 });
