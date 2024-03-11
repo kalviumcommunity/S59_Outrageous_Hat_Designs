@@ -13,7 +13,7 @@ function NavBar() {
           </div>
           
           <div className='flex-buttons'>
-            <p>Home</p>
+            <Link to='/'style={{ textDecoration: 'none', color: 'inherit' }}><p>Home</p></Link>
             <p>New</p>
             <p>Trend</p>
           </div>
@@ -21,7 +21,7 @@ function NavBar() {
             <div><img src={Search}/></div>
             <Link to='/wishlist'><div><img src={Heart}/></div></Link>
             <div><img src={Cart}/></div>
-            <button className='button-orange'>Sign Up</button>
+            <Link to="/signUp"><button className='button-orange'>Sign Up</button></Link>
           </div>
     </div>
   );
