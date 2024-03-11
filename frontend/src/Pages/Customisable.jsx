@@ -39,7 +39,7 @@ function AddCustomisable() {
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const response = await fetch("http://localhost:3000/crude-api/customizable");
+            const response = await fetch("https://hat-bxol.onrender.com/crude-api/customizable");
             const json = await response.json();
             console.log(json)
             setEntities(json);
@@ -60,7 +60,7 @@ function AddCustomisable() {
         imageUrl: imageUrl || "",
       };
   
-      const response = await fetch(`http://localhost:3000/crude-api/customUpdate/${id}`, {
+      const response = await fetch(`https://hat-bxol.onrender.com/crude-api/customUpdate/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +89,7 @@ function AddCustomisable() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/crude-api/customDelete/${id}`, {
+      const response = await fetch(`https://hat-bxol.onrender.com/crude-api/customDelete/${id}`, {
         method: "DELETE",
       });
   
@@ -119,7 +119,7 @@ function AddCustomisable() {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/crude-api/add_customizable_hat",
+        "https://hat-bxol.onrender.com/crude-api/add_customizable_hat",
         {
           method: "POST",
           headers: {
