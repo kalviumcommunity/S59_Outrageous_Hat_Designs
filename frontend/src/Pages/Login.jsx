@@ -77,6 +77,9 @@ function Login() {
         if(token){
           document.cookie = `token=${token}; max-age=3600; path=/`;
           document.cookie = `Email=${registeredData.Email};expires=Fri, 31 Dec 2024 23:59:59 GMT; path=/`;}
+        else{
+          toast.error('Token cannot be added');
+        }
         
       } else {
         console.error("Login failed");
