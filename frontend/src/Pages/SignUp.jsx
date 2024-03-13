@@ -40,7 +40,7 @@ function SignUp() {
     setRegisteredData(data);
     console.log(data)
       try {
-        const response = await fetch("http://localhost:3000/add_user", {
+        const response = await fetch("https://hat-bxol.onrender.com/add_user", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
