@@ -1,0 +1,42 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+  .form-signUp{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .form-signUp button{
+    width: 100px;
+    margin: 0 auto;
+  }
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+.input-container .icon {
+    margin-right: 10px;
+  }
+  
+  .error{
+    display: flex;
+    font-size: 10px;
+  }
+  .error img{
+    height: 30px;
+  }
+  #login-text{
+    text-align: center;
+    margin-top: 30px;
+    font-weight: bolder;
+    font-size: 17px;
+  }
+  #login-text span{
+    text-decoration: underline;
+    color:  #EB6D15;
+    font-weight: bold;
+  }

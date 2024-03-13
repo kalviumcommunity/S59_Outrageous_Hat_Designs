@@ -156,7 +156,7 @@ function AddCustomisable() {
         <Dialog open={open} onClose={handleClose} >
           <DialogTitle>{isUpdate ? <h1>Update Your Hat Designs</h1> : <h1>Add Your Hat Designs</h1>}</DialogTitle>
           <DialogContent sx={{height:"500px",width:"500px"}}>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="form-custom">
               <div>
                 <TextField sx={{marginTop:"20px"}}
                   label="Design Name"
@@ -190,7 +190,7 @@ function AddCustomisable() {
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
             {isUpdate?<Button onClick={() => handleUpdate(currentId)}>Update</Button>:<Button type="submit" onClick={handleSubmit}>Add Customisable Hat</Button>}
-          </DialogActions>
+          </DialogActions> 
         </Dialog>
         <div className="Formcontainer">
         {entities.map((entity, index) => (

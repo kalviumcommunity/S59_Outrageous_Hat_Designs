@@ -7,6 +7,7 @@ import Wishlist from './Pages/Wishlist'
 import Customisable from './Pages/Customisable';
 import ImageGallery from './components/ImageGallery'
 import SignUp from './Pages/SignUp'
+import Login from './Pages/Login'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path='/wishlist' element={<><NavBar/><Wishlist/></>}/>
       <Route path='/custom' element={<><NavBar/><ImageGallery/><Customisable/></>}/>
       <Route path='/signUp'element={<SignUp/>}/>
+      <Route path='/login' element={<Login/>}/>
     </Routes>
     </>
   )

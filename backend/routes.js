@@ -3,7 +3,7 @@ const router = express.Router();
 const { connectToDB } = require("./db");
 const Hat = require("./Model/schema");
 const CustomisableHat = require("./Model/CustomisableHat");
-const {ValidateCustom,ValidateHat}=require("./Model/joi_schema")
+const {ValidateCustom}=require("./Model/joi_schema")
 
 router.get("/", async (req, res) => {
   try {
