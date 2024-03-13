@@ -39,7 +39,7 @@ function Login() {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:3000/logout", {
+      const response = await fetch("https://hat-bxol.onrender.com/logout", {
         method: "POST",
       });
       if (response.ok) {
@@ -58,7 +58,7 @@ function Login() {
     setRegisteredData(data);
     console.log(data)
     try {
-      const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch("https://hat-bxol.onrender.com/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
