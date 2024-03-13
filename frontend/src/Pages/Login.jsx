@@ -18,6 +18,8 @@ import { useForm } from "react-hook-form";
 import ErrorImage from "../assets/error.png";
 import { Link } from "react-router-dom";
 import "../PagesStyles/SignUp.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const {
@@ -44,6 +46,7 @@ function Login() {
       });
       if (response.ok) {
         console.log("Logout successful");
+        document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         document.cookie = "Email=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
         setLoggedIn(false);
       } else {
@@ -67,9 +70,14 @@ function Login() {
       });
 
       if (response.ok) {
-        console.log("Login successful");
+        const {message, user ,token,userId}=await response.json()
+        console.log("Login successful",token);
+        toast.success('Authentication successful');
         setLoggedIn(true);
-        document.cookie = `Email=${registeredData.Email};expires=Fri, 31 Dec 2024 23:59:59 GMT; path=/`;
+        if(token){
+          document.cookie = `token=${token}; max-age=3600; path=/`;
+          document.cookie = `Email=${registeredData.Email};expires=Fri, 31 Dec 2024 23:59:59 GMT; path=/`;}
+        
       } else {
         console.error("Login failed");
       }
@@ -183,6 +191,7 @@ function Login() {
           </CardContent>
         </Card>
       </div>
+      <ToastContainer/>
     </>
   );
 }
