@@ -10,7 +10,8 @@ const HatJoiSchema=Joi.object({
 });
 
 const CustomSchema = Joi.object({
-    design_name: Joi.string().required().min(20).max(30),
+    creator:Joi.string().required().max(30),
+    design_name: Joi.string().required().max(30),
     description: Joi.string().required().max(50),
     imageUrl: Joi.string().required(),
     created_at: Joi.date().default(() => new Date())
