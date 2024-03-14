@@ -26,12 +26,18 @@ function AddCustomisable() {
     const fetchData = async () => {
         try {
             const response = await fetch("https://hat-bxol.onrender.com/crude-api/customizable");
-            const json = await response.json();
-            console.log(json)
-            setEntities(json);
-            setFiltered(json)
-            const uniqueCreators = [...new Set(json.map(entity => entity.creator))];
-            setUser(uniqueCreators);
+            if(response.ok){
+              const json = await response.json();
+              console.log(json)
+              setEntities(json);
+              setFiltered(json)
+              const uniqueCreators = [...new Set(json.map(entity => entity.creator))];
+              setUser(uniqueCreators);
+            }
+            else{
+              toast.error("Failed to Fetch and get the users");
+            }
+            
         } catch (err) {
             console.log(err);
         }
