@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("./Model/User_schema");
 const jwt=require('jsonwebtoken')
+const { SECRET } = process.env
 
 require('dotenv').config()
 
@@ -22,7 +23,7 @@ router.post("/login", async (req, res) => {
     if (!user || !user.validatePassword(Password)) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
-    const token=jwt.sign({userId:user._id},process.env.SECRET,{expiresIn:'1h'});
+    const token=jwt.sign({userId:user._id},SECRET,{expiresIn:'1h'});
 
     res.status(200).json({ message: "Login successful", user ,token,userId:user._id});
   } catch (error) {
