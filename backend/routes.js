@@ -24,10 +24,10 @@ router.get("/customizable",async(req,res)=>{
 })
 router.patch("/customUpdate/:id",async(req,res)=>{
   try {
-    // const {error}=ValidateCustom(req.body)
-    // if(error){
-    //   return res.status(400).json({ error: error.details[0].message });
-    // }
+    const {error}=ValidateCustom(req.body)
+    if(error){
+      return res.status(400).json({ error: error.details[0].message });
+    }
     const customHat = await CustomisableHat.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
