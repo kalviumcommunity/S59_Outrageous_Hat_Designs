@@ -24,10 +24,10 @@ router.get("/customizable",async(req,res)=>{
 })
 router.patch("/customUpdate/:id",async(req,res)=>{
   try {
-    const {error}=ValidateCustom(req.body)
-    if(error){
-      return res.status(400).json({ error: error.details[0].message });
-    }
+    // const {error}=ValidateCustom(req.body)
+    // if(error){
+    //   return res.status(400).json({ error: error.details[0].message });
+    // }
     const customHat = await CustomisableHat.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
@@ -53,7 +53,7 @@ router.delete("/customDelete/:id", async (req, res) => {
 })
 
 router.post("/add_customizable_hat", async (req, res) => {
-  const { design_name, description, imageUrl } = req.body;
+  const {creator, design_name, description, imageUrl } = req.body;
 
   try {
     const {error}=ValidateCustom(req.body)
@@ -61,6 +61,7 @@ router.post("/add_customizable_hat", async (req, res) => {
       return res.status(400).json({ error: error.details[0].message });
     }
       const customisableHat = new CustomisableHat({
+          creator,
           design_name,
           description,
           imageUrl,

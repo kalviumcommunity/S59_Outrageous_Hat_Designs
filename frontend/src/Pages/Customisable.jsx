@@ -3,18 +3,55 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../PagesStyles/customForm.css";
 import Plus from "../assets/plus.png"
-import DateTime from "../components/Date";
+
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import FilteredData from "../components/FilteredData";
 
 function AddCustomisable() {
   const [designName, setDesignName] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [currentUser,setCurrentUser]=useState("")
   const [errorMessage, setErrorMessage] = useState("");
   const [entities, setEntities] = useState([]);
   const [isUpdate,setIsUpdate] =useState(false)
   const [open, setOpen] = useState(false);
   const [currentId,setCurrentId]=useState('')
+  //for filtering
+  const [filtered, setFiltered] = useState([]);
+  const [selectedUser, setSelectedUser] = useState("All");
+  const [user,setUser]=useState([]);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const response = await fetch("https://hat-bxol.onrender.com/crude-api/customizable");
+            const json = await response.json();
+            console.log(json)
+            setEntities(json);
+            setFiltered(json)
+            const uniqueCreators = [...new Set(json.map(entity => entity.creator))];
+            setUser(uniqueCreators);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    fetchData(); 
+}, []); 
+
+  const handleUserFilter = (e) => {
+    const user = e.target.value;
+    setSelectedUser(user);
+    if (user == "All") {
+      setFiltered(entities);
+    } else {
+      const filteredUser = entities.filter(
+        (entity) => entity.creator === user
+      );
+      setFiltered(filteredUser);
+    }
+  };
 
 
   const handleClickOpen = () => {
@@ -31,30 +68,18 @@ function AddCustomisable() {
   }
 
   const handleFields=(each)=>{
+    setCurrentUser(each.creator);
     setDesignName(each.design_name)
     setDescription(each.description)
     setImageUrl(each.imageUrl)
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-        try {
-            const response = await fetch("https://hat-bxol.onrender.com/crude-api/customizable");
-            const json = await response.json();
-            console.log(json)
-            setEntities(json);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    fetchData(); 
-}, []); 
 
 
   const handleUpdate = async (id) => {
     try {
       const updatedObj = {
+        creator:currentUser||"",
         design_name: designName || "",
         description: description || "",
         imageUrl: imageUrl || "",
@@ -112,6 +137,7 @@ function AddCustomisable() {
     event.preventDefault();
 
     let obj = {
+      creator:currentUser ||"",
       design_name: designName || "",
       description: description || "",
       imageUrl: imageUrl || "",
@@ -119,7 +145,7 @@ function AddCustomisable() {
 
     try {
       const response = await fetch(
-        "https://hat-bxol.onrender.com/crude-api/add_customizable_hat",
+        "hhttps://hat-bxol.onrender.com/crude-api/add_customizable_hat",
         {
           method: "POST",
           headers: {
@@ -157,6 +183,15 @@ function AddCustomisable() {
           <DialogTitle>{isUpdate ? <h1>Update Your Hat Designs</h1> : <h1>Add Your Hat Designs</h1>}</DialogTitle>
           <DialogContent sx={{height:"500px",width:"500px"}}>
             <form onSubmit={handleSubmit} className="form-custom">
+            <div>
+                <TextField sx={{marginTop:"20px"}}
+                  label="Creator Name"
+                  type="text"
+                  value={currentUser}
+                  onChange={(e) => setCurrentUser(e.target.value)}
+                  required
+                />
+              </div>
               <div>
                 <TextField sx={{marginTop:"20px"}}
                   label="Design Name"
@@ -192,25 +227,9 @@ function AddCustomisable() {
             {isUpdate?<Button onClick={() => handleUpdate(currentId)}>Update</Button>:<Button type="submit" onClick={handleSubmit}>Add Customisable Hat</Button>}
           </DialogActions> 
         </Dialog>
+
         <div className="Formcontainer">
-        {entities.map((entity, index) => (
-          <div className="hat-card" key={index}>
-          <div className="hat-image">
-            <img src={entity.imageUrl} alt={entity.design_name} />
-          </div>
-          <div className="hat-details">
-            <p><strong>Design Name:</strong> {entity.design_name}</p>
-            <p><strong>Description:</strong> {entity.description}</p>
-            <div className="container-spaceBetween">
-              <div className="button-container">
-              <button className="delete-option" onClick={() => handleDelete(entity._id)}>Delete</button>
-              <button className="update-option" onClick={() => { setIsUpdate(true); handleClickOpen(); setCurrentId(entity._id);handleFields(entity) }}>Edit</button>
-              </div>
-              <DateTime createdAt={entity.created_at}/>
-            </div>
-          </div>
-        </div>
-        ))}
+        <FilteredData handleUserFilter={handleUserFilter} selectedUser={selectedUser} user={user} filtered={filtered} handleDelete={handleDelete} setIsUpdate={setIsUpdate} handleClickOpen={handleClickOpen} setCurrentId={setCurrentId} handleFields={handleFields}/>
       </div>
       <ToastContainer />
     </>
